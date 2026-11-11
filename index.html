@@ -1,0 +1,2314 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090710">
+<title>BESİME GÜZELLİK SALONU</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg:#090710;
+    --bg2:#100b1b;
+    --card:rgba(255,255,255,.055);
+    --glass:rgba(255,255,255,.075);
+    --line:rgba(220,190,255,.17);
+    --purple:#9c64e9;
+    --purple2:#c69bff;
+    --pink:#e7b1ee;
+    --text:#f8f2ff;
+    --muted:#aaa0b8;
+    --shadow:0 20px 65px rgba(0,0,0,.4);
+}
+
+* {
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html {
+    scroll-behavior:smooth;
+    scroll-padding-top:100px;
+}
+
+body {
+    font-family:'DM Sans',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    transition:background .4s,color .4s;
+}
+
+body.light {
+    --bg:#f5effb;
+    --bg2:#eae0f5;
+    --card:rgba(255,255,255,.72);
+    --glass:rgba(255,255,255,.78);
+    --line:rgba(120,70,160,.2);
+    --text:#24152e;
+    --muted:#74647e;
+    --shadow:0 20px 65px rgba(70,35,95,.13);
+}
+
+button,input,textarea,select {
+    font:inherit;
+}
+
+button {
+    cursor:pointer;
+}
+
+a {
+    color:inherit;
+    text-decoration:none;
+}
+
+::selection {
+    background:#a26de7;
+    color:white;
+}
+
+/* BACKGROUND */
+
+.background-glow {
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    filter:blur(130px);
+    opacity:.19;
+    pointer-events:none;
+    z-index:-1;
+}
+
+.glow-one {
+    background:#8038c9;
+    top:0;
+    left:-200px;
+}
+
+.glow-two {
+    background:#a44a9e;
+    right:-250px;
+    top:45%;
+}
+
+.glow-three {
+    background:#5823a3;
+    bottom:-300px;
+    left:30%;
+}
+
+/* OPENING ANIMATION */
+
+#intro {
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    pointer-events:none;
+}
+
+.curtain {
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:50.1%;
+    background:
+        radial-gradient(ellipse at center,rgba(121,64,169,.25),transparent 65%),
+        linear-gradient(135deg,#080610,#1b1025,#090710);
+}
+
+.curtain-left {
+    left:0;
+    border-right:1px solid rgba(220,180,255,.22);
+    animation:openLeft 1.6s cubic-bezier(.76,0,.18,1) 1s forwards;
+}
+
+.curtain-right {
+    right:0;
+    border-left:1px solid rgba(220,180,255,.22);
+    animation:openRight 1.6s cubic-bezier(.76,0,.18,1) 1s forwards;
+}
+
+@keyframes openLeft {
+    to {
+        transform:translateX(-105%);
+    }
+}
+
+@keyframes openRight {
+    to {
+        transform:translateX(105%);
+    }
+}
+
+.laser-device {
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:145px;
+    height:145px;
+    transform:translate(-50%,-50%);
+    z-index:5;
+    filter:drop-shadow(0 0 25px rgba(185,125,255,.7));
+    animation:laserOut .8s ease 1.15s forwards;
+}
+
+@keyframes laserOut {
+    to {
+        opacity:0;
+        transform:translate(-50%,-50%) scale(1.8) rotate(35deg);
+    }
+}
+
+.intro-title {
+    position:absolute;
+    top:calc(50% + 105px);
+    left:50%;
+    transform:translateX(-50%);
+    width:90%;
+    text-align:center;
+    color:#e8d4ff;
+    letter-spacing:5px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(17px,3vw,25px);
+    text-shadow:0 0 25px #a56ad6;
+    animation:titleOut .5s ease 1.2s forwards;
+}
+
+@keyframes titleOut {
+    to {
+        opacity:0;
+        transform:translateX(-50%) translateY(-20px);
+    }
+}
+
+/* AMBIENT BACKGROUND EFFECTS */
+
+#ambientLayer {
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+}
+
+header, main, footer {
+    position:relative;
+    z-index:1;
+}
+
+/* FALLING FLOWERS */
+
+.fall-flower {
+    position:fixed;
+    top:-40px;
+    left:var(--left);
+    width:25px;
+    height:25px;
+    z-index:100000;
+    pointer-events:none;
+    animation:flowerFall var(--duration) linear var(--delay) forwards;
+}
+
+.fall-flower i {
+    position:absolute;
+    width:11px;
+    height:15px;
+    border-radius:80% 15% 80% 15%;
+    background:linear-gradient(140deg,#f6c9fb,#a96be0);
+    left:7px;
+    top:2px;
+    transform-origin:bottom center;
+}
+
+.fall-flower i:nth-child(1) {transform:rotate(0deg) translateY(-5px);}
+.fall-flower i:nth-child(2) {transform:rotate(72deg) translateY(-5px);}
+.fall-flower i:nth-child(3) {transform:rotate(144deg) translateY(-5px);}
+.fall-flower i:nth-child(4) {transform:rotate(216deg) translateY(-5px);}
+.fall-flower i:nth-child(5) {transform:rotate(288deg) translateY(-5px);}
+
+.fall-flower::after {
+    content:"";
+    position:absolute;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#f8dc9b;
+    left:9px;
+    top:9px;
+}
+
+@keyframes flowerFall {
+    0% {
+        opacity:0;
+        transform:translateY(-5vh) rotate(0deg);
+    }
+    10% {opacity:1;}
+    90% {opacity:.8;}
+    100% {
+        opacity:0;
+        transform:translateY(115vh) rotate(720deg) translateX(100px);
+    }
+}
+
+/* HEADER */
+
+header {
+    position:sticky;
+    top:0;
+    z-index:1000;
+    width:100%;
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+    background:rgba(9,7,16,.73);
+    border-bottom:1px solid var(--line);
+}
+
+body.light header {
+    background:rgba(245,239,251,.82);
+}
+
+.navbar {
+    max-width:1450px;
+    margin:auto;
+    min-height:90px;
+    padding:14px 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.brand {
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.brand-name {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(17px,2.4vw,27px);
+    font-weight:700;
+    letter-spacing:2px;
+    background:linear-gradient(110deg,#fff,#d7a7ff,#9b65dd);
+    -webkit-background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 3px 12px rgba(180,120,255,.3));
+}
+
+.brand-sub {
+    font-size:10px;
+    color:var(--muted);
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.nav-actions {
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.glass-btn {
+    border:1px solid rgba(220,190,255,.25);
+    color:var(--text);
+    background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.025));
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border-radius:50px;
+    padding:12px 19px;
+    transition:.35s;
+    box-shadow:inset 0 1px 1px rgba(255,255,255,.12),0 8px 25px rgba(0,0,0,.15);
+}
+
+.glass-btn:hover {
+    transform:translateY(-4px);
+    border-color:#c48aff;
+    box-shadow:0 0 30px rgba(172,100,245,.25);
+}
+
+.theme-btn {
+    width:43px;
+    height:43px;
+    border-radius:50%;
+    font-size:17px;
+    padding:0;
+}
+
+.primary-btn {
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(226,187,255,.4);
+    color:white;
+    background:linear-gradient(120deg,#6f35a3,#a76cdb,#7844a6);
+    border-radius:50px;
+    padding:15px 27px;
+    font-weight:600;
+    letter-spacing:.4px;
+    box-shadow:0 10px 35px rgba(140,76,203,.27),inset 0 1px 2px rgba(255,255,255,.3);
+    transition:.35s;
+}
+
+.primary-btn::before {
+    content:"";
+    position:absolute;
+    top:-100%;
+    left:-80%;
+    width:55%;
+    height:300%;
+    transform:rotate(30deg);
+    background:rgba(255,255,255,.17);
+    transition:.6s;
+}
+
+.primary-btn:hover::before {
+    left:140%;
+}
+
+.primary-btn:hover {
+    transform:translateY(-4px) scale(1.025);
+    box-shadow:0 15px 40px rgba(155,85,215,.4);
+}
+
+/* HERO */
+
+.hero {
+    position:relative;
+    max-width:1450px;
+    min-height:670px;
+    padding:105px 6% 100px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+}
+
+.hero-content {
+    max-width:850px;
+    position:relative;
+    z-index:2;
+}
+
+.small-label {
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:9px 17px;
+    border:1px solid var(--line);
+    background:var(--glass);
+    border-radius:50px;
+    color:var(--purple2);
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:30px;
+}
+
+.small-label span {
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#c494ff;
+    box-shadow:0 0 15px #c494ff;
+}
+
+.hero h1 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(49px,8vw,105px);
+    font-weight:500;
+    line-height:1.02;
+    letter-spacing:-2px;
+    margin-bottom:25px;
+}
+
+.hero h1 em {
+    display:block;
+    font-weight:400;
+    background:linear-gradient(100deg,#d2a4ff,#f1c5eb,#9b70da);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero-description {
+    max-width:580px;
+    color:var(--muted);
+    font-size:15px;
+    line-height:2;
+    margin-bottom:30px;
+}
+
+.hero-buttons {
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:14px;
+}
+
+.phone-link {
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 20px;
+    border:1px solid var(--line);
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+    border-radius:50px;
+    font-size:14px;
+    transition:.3s;
+}
+
+.phone-link:hover {
+    border-color:var(--purple2);
+    transform:translateY(-3px);
+}
+
+.hero-decoration {
+    position:absolute;
+    width:420px;
+    height:420px;
+    right:7%;
+    top:50%;
+    transform:translateY(-50%);
+    border-radius:50%;
+    border:1px solid rgba(194,133,255,.16);
+    box-shadow:0 0 100px rgba(148,83,202,.11),inset 0 0 100px rgba(148,83,202,.08);
+}
+
+.hero-decoration::before,
+.hero-decoration::after {
+    content:"";
+    position:absolute;
+    inset:25px;
+    border:1px solid rgba(220,170,255,.14);
+    border-radius:50%;
+}
+
+.hero-decoration::after {
+    inset:60px;
+    border-style:dashed;
+    animation:rotate 45s linear infinite;
+}
+
+@keyframes rotate {
+    to {transform:rotate(360deg);}
+}
+
+.decoration-center {
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Cormorant Garamond',serif;
+    font-size:110px;
+    color:rgba(218,174,255,.3);
+    text-shadow:0 0 55px rgba(176,110,237,.5);
+}
+
+.hero-decoration .orbit {
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#d8adff;
+    box-shadow:0 0 25px #a967e8;
+    animation:orbit 12s linear infinite;
+}
+
+@keyframes orbit {
+    from {transform:rotate(0) translateX(205px) rotate(0);}
+    to {transform:rotate(360deg) translateX(205px) rotate(-360deg);}
+}
+
+/* SECTIONS */
+
+.section {
+    max-width:1450px;
+    padding:95px 6%;
+    margin:auto;
+}
+
+.about-section {
+    display:grid;
+    grid-template-columns:minmax(240px,.8fr) minmax(0,1.2fr);
+    align-items:center;
+    gap:clamp(35px,7vw,95px);
+}
+
+.about-photo-frame {
+    padding:12px;
+    border:1px solid var(--line);
+    border-radius:30px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+}
+
+.about-photo {
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:560px;
+    object-fit:contain;
+    border-radius:20px;
+    background:var(--bg2);
+}
+
+.about-copy .eyebrow {
+    color:var(--purple2);
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+.about-copy h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    font-size:clamp(39px,6vw,64px);
+    line-height:1.08;
+    margin-bottom:18px;
+}
+
+.about-copy p {
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.9;
+    margin-bottom:25px;
+}
+
+@media(max-width:700px) {
+    .about-section {
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .about-photo-frame {
+        max-width:390px;
+        margin:auto;
+    }
+}
+
+.section-heading {
+    text-align:center;
+    max-width:700px;
+    margin:0 auto 55px;
+}
+
+.section-heading .eyebrow {
+    color:var(--purple2);
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:15px;
+}
+
+.section-heading h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    font-size:clamp(39px,6vw,64px);
+    margin-bottom:15px;
+}
+
+.section-heading p {
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.9;
+}
+
+.reveal {
+    opacity:0;
+    transform:translateY(55px);
+    transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.visible {
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* INFO CARDS */
+
+.info-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.info-card {
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:25px;
+    padding:32px;
+    backdrop-filter:blur(20px);
+    box-shadow:var(--shadow);
+    transition:.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+.info-card:hover {
+    transform:translateY(-8px);
+    border-color:rgba(191,137,255,.5);
+}
+
+.info-symbol {
+    font-size:27px;
+    color:var(--purple2);
+    margin-bottom:22px;
+}
+
+.info-card h3 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:27px;
+    margin-bottom:12px;
+}
+
+.info-card p {
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.9;
+}
+
+/* LISTINGS */
+
+.listing-grid {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:25px;
+}
+
+.listing-card {
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--line);
+    overflow:hidden;
+    border-radius:25px;
+    transition:.4s;
+    box-shadow:var(--shadow);
+}
+
+.listing-card:hover {
+    transform:translateY(-9px);
+    border-color:rgba(193,134,255,.55);
+}
+
+.listing-image {
+    height:260px;
+    overflow:hidden;
+    background:linear-gradient(135deg,#251536,#0c0913);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.listing-image img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s;
+}
+
+.listing-card:hover .listing-image img {
+    transform:scale(1.08);
+}
+
+.listing-placeholder {
+    color:#c8a3ec;
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+}
+
+.listing-info {
+    padding:25px;
+}
+
+.listing-info h3 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:27px;
+    margin-bottom:10px;
+}
+
+.listing-info p {
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.8;
+    min-height:45px;
+    margin-bottom:17px;
+    overflow-wrap:anywhere;
+}
+
+.listing-bottom {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.listing-price {
+    color:var(--purple2);
+    font-size:20px;
+    font-weight:700;
+}
+
+.listing-bottom .primary-btn {
+    padding:12px 17px;
+    font-size:12px;
+}
+
+.empty-listings {
+    grid-column:1/-1;
+    text-align:center;
+    padding:70px 20px;
+    border:1px dashed var(--line);
+    border-radius:25px;
+    background:var(--card);
+    color:var(--muted);
+}
+
+.empty-listings strong {
+    display:block;
+    color:var(--text);
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+/* APPOINTMENT */
+
+.appointment-section {
+    padding-top:65px;
+}
+
+.appointment-box {
+    position:relative;
+    text-align:center;
+    overflow:hidden;
+    border:1px solid rgba(203,153,255,.3);
+    border-radius:35px;
+    padding:75px 25px;
+    background:
+        radial-gradient(ellipse at center,rgba(137,70,191,.24),transparent 65%),
+        var(--card);
+    box-shadow:var(--shadow);
+}
+
+.appointment-box::before {
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    border:1px solid rgba(216,167,255,.12);
+    left:-130px;
+    top:-160px;
+}
+
+.appointment-box h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(40px,6vw,65px);
+    font-weight:500;
+    margin-bottom:15px;
+}
+
+.appointment-box p {
+    color:var(--muted);
+    margin-bottom:30px;
+    font-size:14px;
+}
+
+/* FOOTER */
+
+footer {
+    border-top:1px solid var(--line);
+    background:rgba(0,0,0,.14);
+    padding:65px 6% 25px;
+}
+
+.footer-inner {
+    max-width:1350px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr;
+    gap:35px;
+    padding-bottom:45px;
+}
+
+.footer-brand {
+    font-family:'Cormorant Garamond',serif;
+    font-size:29px;
+    margin-bottom:13px;
+    color:var(--purple2);
+}
+
+.footer-column p {
+    color:var(--muted);
+    font-size:13px;
+    line-height:2;
+}
+
+.footer-column h4 {
+    margin-bottom:18px;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+}
+
+.footer-links {
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    font-size:13px;
+    color:var(--muted);
+}
+
+.footer-links a {
+    transition:.25s;
+}
+
+.footer-links a:hover {
+    color:var(--purple2);
+    transform:translateX(4px);
+}
+
+.copyright {
+    text-align:center;
+    color:var(--muted);
+    font-size:11px;
+    border-top:1px solid var(--line);
+    padding-top:24px;
+}
+
+/* MODALS */
+
+.modal-overlay {
+    position:fixed;
+    inset:0;
+    z-index:5000;
+    padding:20px;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.77);
+    backdrop-filter:blur(12px);
+    overflow-y:auto;
+}
+
+.modal-overlay.active {
+    display:flex;
+    animation:fadeIn .3s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+.modal {
+    width:100%;
+    max-width:510px;
+    max-height:90vh;
+    overflow-y:auto;
+    border-radius:25px;
+    border:1px solid rgba(203,154,255,.3);
+    background:#120d1d;
+    color:#f8f2ff;
+    padding:30px;
+    box-shadow:0 25px 100px rgba(0,0,0,.6);
+    position:relative;
+}
+
+.modal.large {
+    max-width:1000px;
+}
+
+.modal-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:27px;
+}
+
+.modal-header h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:31px;
+    font-weight:500;
+}
+
+.close-btn {
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:50%;
+    width:38px;
+    height:38px;
+    font-size:22px;
+    transition:.3s;
+}
+
+.close-btn:hover {
+    background:#793a9e;
+    transform:rotate(90deg);
+}
+
+/* FORM */
+
+.form-group {
+    margin-bottom:18px;
+}
+
+.form-group label {
+    display:block;
+    font-size:12px;
+    color:#c7b2d9;
+    margin-bottom:9px;
+    letter-spacing:.5px;
+}
+
+.form-control {
+    display:block;
+    width:100%;
+    padding:14px 16px;
+    color:#fff;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(218,185,255,.18);
+    border-radius:13px;
+    outline:none;
+    transition:.3s;
+}
+
+.form-control:focus {
+    border-color:#ac74e9;
+    box-shadow:0 0 0 3px rgba(171,112,224,.13);
+}
+
+.form-control::placeholder {
+    color:#80718c;
+}
+
+.form-control option {
+    background:#170f24;
+    color:white;
+}
+
+textarea.form-control {
+    resize:vertical;
+    min-height:105px;
+}
+
+.form-submit {
+    width:100%;
+    margin-top:8px;
+}
+
+.form-note {
+    font-size:11px;
+    line-height:1.7;
+    color:#a999b7;
+    margin-top:15px;
+    text-align:center;
+}
+
+/* ADMIN */
+
+.admin-note {
+    background:rgba(169,110,223,.1);
+    border:1px solid rgba(190,138,240,.19);
+    padding:12px;
+    margin-bottom:23px;
+    border-radius:12px;
+    color:#d8c0ed;
+    font-size:11px;
+    line-height:1.8;
+}
+
+.admin-tabs {
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    padding-bottom:17px;
+    margin-bottom:23px;
+}
+
+.admin-tab {
+    padding:11px 17px;
+    border-radius:30px;
+    background:rgba(255,255,255,.055);
+    color:#bfaaca;
+    border:1px solid transparent;
+    font-size:12px;
+}
+
+.admin-tab.active {
+    color:white;
+    background:rgba(160,95,212,.25);
+    border-color:#a36fd2;
+}
+
+.admin-panel-content {
+    display:none;
+}
+
+.admin-panel-content.active {
+    display:block;
+}
+
+.admin-list {
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.admin-item {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    padding:17px;
+    border-radius:15px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.09);
+}
+
+.admin-item-main {
+    min-width:0;
+}
+
+.admin-item-main strong {
+    display:block;
+    color:white;
+    font-size:14px;
+    margin-bottom:7px;
+    overflow-wrap:anywhere;
+}
+
+.admin-item-main small {
+    display:block;
+    color:#ad99bb;
+    font-size:11px;
+    line-height:1.7;
+    overflow-wrap:anywhere;
+}
+
+.admin-delete {
+    flex-shrink:0;
+    border:1px solid rgba(255,110,140,.3);
+    color:#ff9eaf;
+    background:rgba(255,90,120,.08);
+    border-radius:30px;
+    padding:9px 14px;
+    font-size:11px;
+    transition:.3s;
+}
+
+.admin-delete:hover {
+    background:rgba(255,90,120,.2);
+}
+
+.admin-empty {
+    text-align:center;
+    color:#a999b7;
+    padding:35px 15px;
+    border:1px dashed rgba(255,255,255,.13);
+    border-radius:15px;
+    font-size:13px;
+}
+
+.admin-form-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.upload-box {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding:20px;
+    text-align:center;
+    border:1px dashed rgba(201,155,255,.4);
+    border-radius:15px;
+    background:rgba(170,100,225,.07);
+    color:#c8b0dc;
+    font-size:12px;
+}
+
+.upload-box input {
+    max-width:100%;
+    font-size:11px;
+}
+
+.preview-image {
+    width:100%;
+    max-height:180px;
+    object-fit:contain;
+    display:none;
+    border-radius:10px;
+}
+
+.admin-stats {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:22px;
+}
+
+.stat-card {
+    text-align:center;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:15px;
+    padding:15px 8px;
+}
+
+.stat-card strong {
+    display:block;
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    color:#d6adff;
+}
+
+.stat-card span {
+    color:#a999b7;
+    font-size:10px;
+}
+
+/* TOAST */
+
+#toast {
+    position:fixed;
+    z-index:100000;
+    bottom:25px;
+    left:50%;
+    transform:translate(-50%,30px);
+    padding:14px 23px;
+    border:1px solid rgba(210,174,255,.35);
+    background:rgba(25,15,38,.95);
+    color:white;
+    border-radius:40px;
+    font-size:13px;
+    opacity:0;
+    pointer-events:none;
+    transition:.35s;
+    box-shadow:0 10px 40px rgba(0,0,0,.3);
+    width:max-content;
+    max-width:90%;
+    text-align:center;
+}
+
+#toast.show {
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px) {
+    .hero-decoration {
+        opacity:.35;
+        right:-160px;
+    }
+
+    .listing-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .info-grid {
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:650px) {
+    .navbar {
+        padding:13px 4%;
+        min-height:75px;
+        gap:10px;
+    }
+
+    .brand-name {
+        font-size:16px;
+        letter-spacing:1px;
+    }
+
+    .brand-sub {
+        font-size:8px;
+        letter-spacing:1px;
+    }
+
+    .nav-actions {
+        gap:6px;
+    }
+
+    .glass-btn {
+        padding:10px 12px;
+        font-size:11px;
+    }
+
+    .theme-btn {
+        width:37px;
+        height:37px;
+        padding:0;
+    }
+
+    .hero {
+        min-height:580px;
+        padding:95px 6% 75px;
+    }
+
+    .hero-decoration {
+        width:260px;
+        height:260px;
+        right:-100px;
+        opacity:.23;
+    }
+
+    .hero-buttons {
+        align-items:stretch;
+        flex-direction:column;
+        width:100%;
+    }
+
+    .hero-buttons button,
+    .hero-buttons a {
+        justify-content:center;
+        text-align:center;
+    }
+
+    .section {
+        padding:70px 5%;
+    }
+
+    .listing-grid {
+        grid-template-columns:1fr;
+    }
+
+    .listing-image {
+        height:240px;
+    }
+
+    .footer-inner {
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .modal {
+        padding:22px 17px;
+    }
+
+    .admin-form-grid {
+        grid-template-columns:1fr;
+    }
+
+    .admin-stats {
+        grid-template-columns:1fr 1fr 1fr;
+    }
+
+    .admin-item {
+        align-items:flex-start;
+    }
+
+    .intro-title {
+        letter-spacing:2px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *,*::before,*::after {
+        scroll-behavior:auto!important;
+        animation-duration:.01ms!important;
+        transition-duration:.01ms!important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="ambientLayer" aria-hidden="true"></div>
+<div class="background-glow glow-one"></div>
+<div class="background-glow glow-two"></div>
+<div class="background-glow glow-three"></div>
+
+<!-- OPENING -->
+
+<div id="intro">
+    <div class="curtain curtain-left"></div>
+    <div class="curtain curtain-right"></div>
+
+    <svg class="laser-device" viewBox="0 0 160 160" fill="none" role="img" aria-label="Lazer epilasyon cihazı">
+        <defs>
+            <linearGradient id="laserBody" x1="53" y1="70" x2="105" y2="139" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#f0d9ff"/>
+                <stop offset="1" stop-color="#9e63d9"/>
+            </linearGradient>
+            <filter id="laserGlow" x="12" y="9" width="136" height="144" filterUnits="userSpaceOnUse">
+                <feGaussianBlur stdDeviation="5"/>
+            </filter>
+        </defs>
+        <path d="M68 33H101L119 56L105 70L115 118Q117 130 105 134L77 143Q65 146 61 134L48 91L37 78L42 48L68 33Z" fill="#b875ed" opacity=".3" filter="url(#laserGlow)"/>
+        <path d="M67 37L99 31L117 52L103 68L113 116Q115 125 106 128L79 137Q70 140 67 130L53 87L41 75L46 49L67 37Z" fill="url(#laserBody)" stroke="#f0d9ff" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M46 51L24 42L18 54L42 73" fill="#c58af0" stroke="#f0d9ff" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M20 47L6 39M18 54L3 54M22 61L9 69" stroke="#f5c8ff" stroke-width="3" stroke-linecap="round"/>
+        <rect x="53" y="53" width="42" height="12" rx="6" transform="rotate(-11 53 53)" fill="#6e3d9b" opacity=".75"/>
+        <circle cx="76" cy="57" r="3" fill="#fff1ff"/>
+        <path d="M78 91L99 85M81 101L102 95M84 111L105 105" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+        <path d="M122 30L126 20M132 38L142 34M124 47L133 51" stroke="#f5c8ff" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+
+    <div class="intro-title">BESİME GÜZELLİK SALONU</div>
+</div>
+
+<!-- HEADER -->
+
+<header>
+    <nav class="navbar">
+        <a href="#anasayfa" class="brand">
+            <span class="brand-name">BESİME GÜZELLİK SALONU</span>
+            <span class="brand-sub">15 senelik iş tecrübesi ve güvence</span>
+        </a>
+
+        <div class="nav-actions">
+            <button class="glass-btn theme-btn" id="themeToggle" aria-label="Tema değiştir">☼</button>
+            <button class="glass-btn" id="adminOpen">İlgili</button>
+        </div>
+    </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero" id="anasayfa">
+
+    <div class="hero-content reveal">
+        <div class="small-label">
+            <span></span>
+            GÜZELLİK VE BAKIM
+        </div>
+
+        <h1>
+            Güzelliğinizin
+            <em>özel dokunuşu.</em>
+        </h1>
+
+        <p class="hero-description">
+            BESİME GÜZELLİK SALONU'na hoş geldiniz.
+            15 senelik iş tecrübemiz ve güven anlayışımızla
+            kendinize ayırdığınız zamanı özel kılıyoruz.
+            Hizmetlerimizi keşfedin ve randevunuzu oluşturun.
+        </p>
+
+        <div class="hero-buttons">
+            <button class="primary-btn" onclick="openAppointment()">
+                Randevu başvurusu &nbsp; ↗
+            </button>
+
+            <a href="tel:+905462842307" class="phone-link">
+                +90 546 284 23 07
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-decoration">
+        <div class="decoration-center">B</div>
+        <div class="orbit"></div>
+    </div>
+</section>
+
+<!-- ABOUT PHOTO -->
+
+<section class="section about-section">
+    <div class="about-photo-frame reveal">
+        <img
+            class="about-photo"
+            src="WhatsApp Image 2026-11-11 at 8.27.18 AM.jpeg"
+            alt="Besime Güzellik Salonu için paylaşılan portre fotoğrafı">
+    </div>
+
+    <div class="about-copy reveal">
+        <div class="eyebrow">BESİME GÜZELLİK SALONU</div>
+        <h2>Güzelliğinize özenli bir dokunuş</h2>
+        <p>
+            15 senelik tecrübemizle güzellik ve bakım yolculuğunuzda
+            sizi özenle karşılıyoruz. Hizmetlerimiz hakkında bilgi almak
+            veya randevu başvurusu oluşturmak için bize ulaşabilirsiniz.
+        </p>
+        <button class="primary-btn" onclick="openAppointment()">
+            Randevu başvurusu &nbsp; ↗
+        </button>
+    </div>
+</section>
+
+<!-- INFORMATION -->
+
+<section class="section">
+    <div class="section-heading reveal">
+        <div class="eyebrow">BESİME GÜZELLİK SALONU</div>
+        <h2>Güzelliğinize değer veriyoruz</h2>
+        <p>
+            Her ziyaretinizde özen, ilgi ve güven anlayışımızla
+            sizlere özel bir deneyim sunmayı amaçlıyoruz.
+        </p>
+    </div>
+
+    <div class="info-grid">
+
+        <article class="info-card reveal">
+            <div class="info-symbol">◇</div>
+            <h3>15 Senelik Tecrübe</h3>
+            <p>
+                Yılların verdiği iş tecrübesiyle
+                güzellik ve bakım alanında özenli hizmet anlayışı.
+            </p>
+        </article>
+
+        <article class="info-card reveal">
+            <div class="info-symbol">✧</div>
+            <h3>Size Özel İlgi</h3>
+            <p>
+                İhtiyaçlarınızı dinliyor, hizmetlerimiz hakkında
+                detaylı bilgi alabilmeniz için yanınızda oluyoruz.
+            </p>
+        </article>
+
+        <article class="info-card reveal">
+            <div class="info-symbol">❖</div>
+            <h3>Randevu Sistemi</h3>
+            <p>
+                Randevu başvurunuzu kolayca oluşturabilir,
+                merak ettiklerinizi bize iletebilirsiniz.
+            </p>
+        </article>
+
+    </div>
+</section>
+
+<!-- LISTINGS -->
+
+<section class="section" id="ilanlar">
+
+    <div class="section-heading reveal">
+        <div class="eyebrow">HİZMETLERİMİZ VE DUYURULARIMIZ</div>
+        <h2>Özel ilanlarımız</h2>
+        <p>
+            Güncel hizmetlerimizi, fiyatlarımızı ve duyurularımızı
+            aşağıdan inceleyebilirsiniz.
+        </p>
+    </div>
+
+    <div class="listing-grid" id="listingGrid">
+
+        <div class="empty-listings">
+            <strong>İlanlarımız hazırlanıyor</strong>
+            Yeni ilanlar ve hizmetler eklendiğinde burada görüntülenecektir.
+        </div>
+
+    </div>
+</section>
+
+<!-- APPOINTMENT -->
+
+<section class="section appointment-section" id="randevu">
+
+    <div class="appointment-box reveal">
+
+        <div class="eyebrow" style="color:#d9b0ff;letter-spacing:3px;margin-bottom:18px">
+            SİZE ÖZEL
+        </div>
+
+        <h2>Randevunuzu oluşturun</h2>
+
+        <p>
+            Adınızı ve bize iletmek istediklerinizi yazın.
+            Başvurunuz salonumuzun yönetici paneline kaydedilir.
+        </p>
+
+        <button class="primary-btn" onclick="openAppointment()">
+            Randevu başvurusu &nbsp; ↗
+        </button>
+
+        <div style="margin-top:25px;color:var(--muted);font-size:14px">
+            İletişim: +90 546 284 23 07
+        </div>
+
+    </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+    <div class="footer-inner">
+
+        <div class="footer-column">
+            <div class="footer-brand">BESİME GÜZELLİK SALONU</div>
+            <p>
+                15 senelik iş tecrübesi ve güvence anlayışıyla
+                güzellik ve bakım alanında sizlerle.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h4>Bağlantılar</h4>
+            <div class="footer-links">
+                <a href="https://www.instagram.com/besime_lazer_guzellik?dlrf=MW4xdnZtc3Brc3Aweg==" target="_blank" rel="noopener noreferrer">
+                    Instagram ↗
+                </a>
+
+                <a href="https://www.tiktok.com/@besimearda?_r=1&_t=ZS-9BJAnr9mtdN" target="_blank" rel="noopener noreferrer">
+                    TikTok ↗
+                </a>
+
+                <a href="https://wa.me/905462842307" target="_blank" rel="noopener noreferrer">
+                    WhatsApp ↗
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-column">
+            <h4>İletişim</h4>
+            <div class="footer-links">
+                <a href="tel:+905462842307">+90 546 284 23 07</a>
+                <a href="#randevu">Randevu başvurusu</a>
+                <a href="#ilanlar">Hizmetler ve ilanlar</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        BESİME GÜZELLİK SALONU © <span id="year"></span> — TÜM HAKLARI SAKLIDIR.
+    </div>
+</footer>
+
+<!-- APPOINTMENT MODAL -->
+
+<div class="modal-overlay" id="appointmentModal">
+    <div class="modal">
+
+        <div class="modal-header">
+            <h2>Randevu başvurusu</h2>
+            <button class="close-btn" onclick="closeModal('appointmentModal')">×</button>
+        </div>
+
+        <form id="appointmentForm">
+
+            <div class="form-group">
+                <label>İSMİNİZ VE SOYİSMİNİZ</label>
+                <input class="form-control" name="name" required maxlength="100" placeholder="Adınızı ve soyadınızı yazın">
+            </div>
+
+            <div class="form-group">
+                <label>TELEFON NUMARANIZ</label>
+                <input class="form-control" name="phone" type="tel" maxlength="25" placeholder="05XX XXX XX XX">
+            </div>
+
+            <div class="form-group">
+                <label>BAŞVURU TÜRÜ</label>
+                <select class="form-control" name="type">
+                    <option value="Randevu">Randevu başvurusu</option>
+                    <option value="Fiyat bilgisi">Fiyat bilgisi</option>
+                    <option value="Hizmet bilgisi">Hizmet hakkında bilgi</option>
+                    <option value="Diğer">Diğer</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>İLGİLENDİĞİNİZ İLAN / HİZMET</label>
+                <input class="form-control" name="service" id="appointmentService" maxlength="150" placeholder="İlgilendiğiniz hizmet">
+            </div>
+
+            <div class="form-group">
+                <label>MESAJINIZ</label>
+                <textarea class="form-control" name="message" maxlength="2000" placeholder="Bize iletmek istediğiniz mesaj..."></textarea>
+            </div>
+
+            <button type="submit" class="primary-btn form-submit">
+                Başvuruyu gönder &nbsp; ↗
+            </button>
+
+            <div class="form-note">
+                Başvurunuz kaydedilir. İletişim için telefon numaranızı
+                doğru girdiğinizden emin olun.
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- ADMIN MODAL -->
+
+<div class="modal-overlay" id="adminModal">
+    <div class="modal large" id="adminModalContent">
+
+        <div class="modal-header">
+            <h2>Yönetici paneli</h2>
+            <button class="close-btn" onclick="closeModal('adminModal')">×</button>
+        </div>
+
+        <div id="adminLogin">
+
+            <div class="admin-note">
+                Yönetici hesabınıza giriş yapın.
+            </div>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label>YÖNETİCİ İSMİ</label>
+                    <input class="form-control" name="username" required placeholder="Kullanıcı adı" autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label>ŞİFRE</label>
+                    <input class="form-control" name="password" type="password" required placeholder="Yönetici şifresi" autocomplete="current-password">
+                </div>
+
+                <button class="primary-btn form-submit" type="submit">
+                    Yönetici girişi &nbsp; ↗
+                </button>
+
+            </form>
+        </div>
+
+        <div id="adminDashboard" style="display:none">
+
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px;flex-wrap:wrap">
+                <div style="font-size:14px;color:#e1caff">
+                    Yönetici kontrol merkezi
+                </div>
+                <button class="admin-delete" onclick="logoutAdmin()">Güvenli çıkış</button>
+            </div>
+
+            <div class="admin-note">
+                Başvurular ve ilanlar bu tarayıcının yerel kayıt alanında saklanır.
+                Kayıt silmek için ilgili kaydın silme düğmesini kullanın.
+            </div>
+
+            <div class="admin-stats">
+
+                <div class="stat-card">
+                    <strong id="statListings">0</strong>
+                    <span>İlan</span>
+                </div>
+
+                <div class="stat-card">
+                    <strong id="statAppointments">0</strong>
+                    <span>Başvuru</span>
+                </div>
+
+                <div class="stat-card">
+                    <strong id="statMessages">0</strong>
+                    <span>Mesaj</span>
+                </div>
+
+            </div>
+
+            <div class="admin-tabs">
+
+                <button class="admin-tab active" data-tab="addListing">
+                    + İlan ekle
+                </button>
+
+                <button class="admin-tab" data-tab="listingsAdmin">
+                    İlanlar
+                </button>
+
+                <button class="admin-tab" data-tab="appointmentsAdmin">
+                    Başvurular
+                </button>
+
+                <button class="admin-tab" data-tab="messagesAdmin">
+                    Mesajlar
+                </button>
+
+            </div>
+
+            <!-- ADD LISTING -->
+
+            <div class="admin-panel-content active" id="addListing">
+
+                <form id="listingForm">
+
+                    <div class="admin-form-grid">
+
+                        <div class="form-group">
+                            <label>İLAN / HİZMET ADI</label>
+                            <input class="form-control" name="title" required maxlength="100" placeholder="Örnek: Lazer epilasyon">
+                        </div>
+
+                        <div class="form-group">
+                            <label>FİYAT</label>
+                            <input class="form-control" name="price" required maxlength="50" placeholder="Örnek: 1.500 TL">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>AÇIKLAMA</label>
+                        <textarea class="form-control" name="description" maxlength="1000" placeholder="İlanın detaylarını yazın..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>İLAN GÖRSELİ</label>
+
+                        <div class="upload-box">
+                            <span>Görsel seçmek için dosyanı yükle</span>
+                            <input type="file" id="listingImage" accept="image/jpeg,image/png,image/webp">
+                            <img id="imagePreview" class="preview-image" alt="İlan görseli önizlemesi">
+                        </div>
+                    </div>
+
+                    <button class="primary-btn form-submit" type="submit">
+                        İlanı yayınla &nbsp; ↗
+                    </button>
+
+                </form>
+            </div>
+
+            <!-- LISTINGS ADMIN -->
+
+            <div class="admin-panel-content" id="listingsAdmin">
+                <div class="admin-list" id="adminListingList"></div>
+            </div>
+
+            <!-- APPOINTMENTS ADMIN -->
+
+            <div class="admin-panel-content" id="appointmentsAdmin">
+                <div class="admin-list" id="adminAppointmentList"></div>
+            </div>
+
+            <!-- MESSAGES ADMIN -->
+
+            <div class="admin-panel-content" id="messagesAdmin">
+                <div class="admin-list" id="adminMessageList"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+"use strict";
+
+const ADMIN_USERNAME = "Admin";
+const ADMIN_PASSWORD = "besime_lazer";
+
+const STORAGE_KEY = "besime_guzellik_salon_v1";
+
+let database = {
+    listings: [],
+    requests: []
+};
+
+let selectedImage = null;
+let toastTimer = null;
+
+function loadDatabase() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            database.listings = Array.isArray(parsed.listings) ? parsed.listings : [];
+            database.requests = Array.isArray(parsed.requests) ? parsed.requests : [];
+        }
+    } catch (error) {
+        console.error("Veriler okunamadı:", error);
+        database = { listings: [], requests: [] };
+        showToast("Kayıtlar okunamadı.");
+    }
+}
+
+function saveDatabase() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(database));
+        return true;
+    } catch (error) {
+        console.error("Veritabanı kayıt hatası:", error);
+        showToast("Depolama alanı yetersiz. Daha küçük bir görsel deneyin.");
+        return false;
+    }
+}
+
+function createID() {
+    if (window.crypto && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+    return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, function(char) {
+        const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        };
+        return entities[char];
+    });
+}
+
+function formatDate(value) {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+        return "Tarih bilgisi yok";
+    }
+    return date.toLocaleString("tr-TR", {
+        dateStyle: "long",
+        timeStyle: "short"
+    });
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
+
+function createFallingFlowers() {
+    const intro = document.getElementById("intro");
+    for (let i = 0; i < 38; i++) {
+        const flower = document.createElement("span");
+        flower.className = "fall-flower";
+        flower.style.setProperty("--left", Math.random() * 100 + "vw");
+        flower.style.setProperty("--duration", (2.1 + Math.random() * 2.5) + "s");
+        flower.style.setProperty("--delay", (Math.random() * 1.5) + "s");
+
+        for (let p = 0; p < 5; p++) {
+            flower.appendChild(document.createElement("i"));
+        }
+        intro.appendChild(flower);
+    }
+
+    setTimeout(() => {
+        intro.style.display = "none";
+        document.body.style.overflowX = "hidden";
+        document.body.style.overflowY = "auto";
+    }, 2900);
+}
+
+function initializeReveal() {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.12 }
+    );
+
+    document.querySelectorAll(".reveal").forEach(element => {
+        observer.observe(element);
+    });
+}
+
+document.getElementById("themeToggle").addEventListener("click", function() {
+    document.body.classList.toggle("light");
+    const isLight = document.body.classList.contains("light");
+    this.textContent = isLight ? "☾" : "☼";
+});
+
+function openModal(id) {
+    document.getElementById(id).classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove("active");
+    if (!document.querySelector(".modal-overlay.active")) {
+        document.body.style.overflow = "";
+    }
+}
+
+document.querySelectorAll(".modal-overlay").forEach(overlay => {
+    overlay.addEventListener("click", function(event) {
+        if (event.target === overlay) {
+            closeModal(overlay.id);
+        }
+    });
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        document.querySelectorAll(".modal-overlay.active").forEach(modal => {
+            closeModal(modal.id);
+        });
+    }
+});
+
+function openAppointment(service = "") {
+    const input = document.getElementById("appointmentService");
+    input.value = service;
+    openModal("appointmentModal");
+}
+
+document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const form = new FormData(this);
+    const name = String(form.get("name") || "").trim();
+    const phone = String(form.get("phone") || "").trim();
+    const type = String(form.get("type") || "Randevu");
+    const service = String(form.get("service") || "").trim();
+    const message = String(form.get("message") || "").trim();
+
+    if (name.length < 2) {
+        showToast("Lütfen geçerli bir isim yazın.");
+        return;
+    }
+
+    const request = {
+        id: createID(),
+        name: name,
+        phone: phone,
+        type: type,
+        service: service,
+        message: message,
+        createdAt: new Date().toISOString()
+    };
+
+    database.requests.unshift(request);
+    if (!saveDatabase()) {
+        database.requests.shift();
+        return;
+    }
+
+    this.reset();
+    closeModal("appointmentModal");
+    showToast("Başvurunuz kaydedildi.");
+    refreshAdmin();
+});
+
+document.getElementById("listingImage").addEventListener("change", async function() {
+    const file = this.files && this.files[0];
+    selectedImage = null;
+    const preview = document.getElementById("imagePreview");
+    preview.style.display = "none";
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+        showToast("Lütfen bir görsel dosyası seçin.");
+        this.value = "";
+        return;
+    }
+
+    if (file.size > 12 * 1024 * 1024) {
+        showToast("Görsel en fazla 12 MB olabilir.");
+        this.value = "";
+        return;
+    }
+
+    try {
+        selectedImage = await compressImage(file);
+        preview.src = selectedImage;
+        preview.style.display = "block";
+    } catch (error) {
+        console.error(error);
+        showToast("Görsel okunamadı.");
+        selectedImage = null;
+    }
+});
+
+function compressImage(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = function() {
+            const img = new Image();
+            img.onerror = reject;
+            img.onload = function() {
+                const maxSize = 1200;
+                let width = img.width;
+                let height = img.height;
+
+                if (width > maxSize || height > maxSize) {
+                    const ratio = Math.min(maxSize / width, maxSize / height);
+                    width = Math.round(width * ratio);
+                    height = Math.round(height * ratio);
+                }
+
+                const canvas = document.createElement("canvas");
+                canvas.width = width;
+                canvas.height = height;
+                const context = canvas.getContext("2d");
+                context.drawImage(img, 0, 0, width, height);
+                resolve(canvas.toDataURL("image/jpeg", 0.78));
+            };
+            img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+document.getElementById("listingForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const form = new FormData(this);
+    const title = String(form.get("title") || "").trim();
+    const price = String(form.get("price") || "").trim();
+    const description = String(form.get("description") || "").trim();
+
+    if (title.length < 2 || price.length < 1) {
+        showToast("İlan adı ve fiyatı gerekli.");
+        return;
+    }
+
+    const listing = {
+        id: createID(),
+        title: title,
+        price: price,
+        description: description,
+        image: selectedImage || "",
+        createdAt: new Date().toISOString()
+    };
+
+    database.listings.unshift(listing);
+    if (!saveDatabase()) {
+        database.listings.shift();
+        return;
+    }
+
+    this.reset();
+    selectedImage = null;
+    document.getElementById("imagePreview").style.display = "none";
+    renderListings();
+    refreshAdmin();
+    showToast("İlan başarıyla kaydedildi.");
+});
+
+function renderListings() {
+    const grid = document.getElementById("listingGrid");
+    if (!database.listings.length) {
+        grid.innerHTML = `
+            <div class="empty-listings">
+                <strong>İlanlarımız hazırlanıyor</strong>
+                Yeni ilanlar ve hizmetler eklendiğinde burada görüntülenecektir.
+            </div>
+        `;
+        return;
+    }
+
+    grid.innerHTML = database.listings.map(item => {
+        const image = item.image
+            ? `<img src="${escapeHTML(item.image)}" alt="${escapeHTML(item.title)}" loading="lazy">`
+            : `<div class="listing-placeholder">BESİME</div>`;
+
+        return `
+            <article class="listing-card reveal">
+                <div class="listing-image">
+                    ${image}
+                </div>
+                <div class="listing-info">
+                    <h3>${escapeHTML(item.title)}</h3>
+                    <p>${escapeHTML(item.description || "Detaylı bilgi almak için bize ulaşabilirsiniz.")}</p>
+                    <div class="listing-bottom">
+                        <span class="listing-price">
+                            ${escapeHTML(item.price)}
+                        </span>
+                        <button class="primary-btn" onclick="openAppointment('${escapeHTML(item.title).replace(/'/g,"&#39;")}')">
+                            Randevu başvurusu ↗
+                        </button>
+                    </div>
+                </div>
+            </article>
+        `;
+    }).join("");
+
+    initializeReveal();
+}
+
+document.getElementById("adminOpen").addEventListener("click", function() {
+    openModal("adminModal");
+    if (sessionStorage.getItem("besime_admin_logged") === "true") {
+        showDashboard();
+    } else {
+        document.getElementById("adminLogin").style.display = "block";
+        document.getElementById("adminDashboard").style.display = "none";
+    }
+});
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const form = new FormData(this);
+    const username = String(form.get("username") || "");
+    const password = String(form.get("password") || "");
+
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        sessionStorage.setItem("besime_admin_logged", "true");
+        this.reset();
+        showDashboard();
+        showToast("Yönetici girişi başarılı.");
+    } else {
+        showToast("Kullanıcı adı veya şifre hatalı.");
+    }
+});
+
+function showDashboard() {
+    document.getElementById("adminLogin").style.display = "none";
+    document.getElementById("adminDashboard").style.display = "block";
+    refreshAdmin();
+}
+
+function logoutAdmin() {
+    sessionStorage.removeItem("besime_admin_logged");
+    document.getElementById("adminDashboard").style.display = "none";
+    document.getElementById("adminLogin").style.display = "block";
+    closeModal("adminModal");
+    showToast("Oturum kapatıldı.");
+}
+
+document.querySelectorAll(".admin-tab").forEach(button => {
+    button.addEventListener("click", function() {
+        document.querySelectorAll(".admin-tab").forEach(tab => {
+            tab.classList.remove("active");
+        });
+        document.querySelectorAll(".admin-panel-content").forEach(panel => {
+            panel.classList.remove("active");
+        });
+        this.classList.add("active");
+        const target = document.getElementById(this.dataset.tab);
+        if (target) {
+            target.classList.add("active");
+        }
+    });
+});
+
+function refreshAdmin() {
+    if (sessionStorage.getItem("besime_admin_logged") !== "true") {
+        return;
+    }
+
+    document.getElementById("statListings").textContent = database.listings.length;
+    document.getElementById("statAppointments").textContent = database.requests.filter(item => item.type === "Randevu").length;
+    document.getElementById("statMessages").textContent = database.requests.filter(item => item.type !== "Randevu").length;
+
+    renderAdminListings();
+    renderAdminRequests();
+}
+
+function renderAdminListings() {
+    const container = document.getElementById("adminListingList");
+    if (!database.listings.length) {
+        container.innerHTML = `<div class="admin-empty">Henüz ilan eklenmemiş.</div>`;
+        return;
+    }
+
+    container.innerHTML = database.listings.map(item => `
+        <div class="admin-item">
+            <div class="admin-item-main">
+                <strong>${escapeHTML(item.title)}</strong>
+                <small>Fiyat: ${escapeHTML(item.price)}</small>
+                <small>Eklenme: ${formatDate(item.createdAt)}</small>
+            </div>
+            <button class="admin-delete" data-delete-listing="${escapeHTML(item.id)}">Sil</button>
+        </div>
+    `).join("");
+}
+
+function renderAdminRequests() {
+    const appointments = document.getElementById("adminAppointmentList");
+    const messages = document.getElementById("adminMessageList");
+
+    const appointmentData = database.requests.filter(item => item.type === "Randevu");
+    const messageData = database.requests.filter(item => item.type !== "Randevu");
+
+    if (!appointmentData.length) {
+        appointments.innerHTML = `<div class="admin-empty">Henüz randevu başvurusu bulunmuyor.</div>`;
+    } else {
+        appointments.innerHTML = appointmentData.map(item => `
+            <div class="admin-item">
+                <div class="admin-item-main">
+                    <strong>${escapeHTML(item.name)}</strong>
+                    <small>Tür: ${escapeHTML(item.type)}</small>
+                    <small>Telefon: ${escapeHTML(item.phone || "Belirtilmedi")}</small>
+                    <small>Hizmet: ${escapeHTML(item.service || "Belirtilmedi")}</small>
+                    <small>Mesaj: ${escapeHTML(item.message || "Mesaj yok")}</small>
+                    <small>Tarih: ${formatDate(item.createdAt)}</small>
+                </div>
+                <button class="admin-delete" data-delete-request="${escapeHTML(item.id)}">Sil</button>
+            </div>
+        `).join("");
+    }
+
+    if (!messageData.length) {
+        messages.innerHTML = `<div class="admin-empty">Henüz bilgi ve fiyat mesajı bulunmuyor.</div>`;
+    } else {
+        messages.innerHTML = messageData.map(item => `
+            <div class="admin-item">
+                <div class="admin-item-main">
+                    <strong>${escapeHTML(item.name)}</strong>
+                    <small>Tür: ${escapeHTML(item.type)}</small>
+                    <small>Telefon: ${escapeHTML(item.phone || "Belirtilmedi")}</small>
+                    <small>Hizmet: ${escapeHTML(item.service || "Belirtilmedi")}</small>
+                    <small>Mesaj: ${escapeHTML(item.message || "Mesaj yok")}</small>
+                    <small>Tarih: ${formatDate(item.createdAt)}</small>
+                </div>
+                <button class="admin-delete" data-delete-request="${escapeHTML(item.id)}">Sil</button>
+            </div>
+        `).join("");
+    }
+}
+
+document.addEventListener("click", function(event) {
+    if (sessionStorage.getItem("besime_admin_logged") !== "true") {
+        return;
+    }
+
+    const listingButton = event.target.closest("[data-delete-listing]");
+    const requestButton = event.target.closest("[data-delete-request]");
+
+    if (listingButton) {
+        const id = listingButton.dataset.deleteListing;
+        if (!confirm("Bu ilanı silmek istediğinize emin misiniz?")) return;
+        const previous = database.listings;
+        database.listings = database.listings.filter(item => item.id !== id);
+        if (!saveDatabase()) {
+            database.listings = previous;
+            return;
+        }
+        renderListings();
+        refreshAdmin();
+        showToast("İlan silindi.");
+    }
+
+    if (requestButton) {
+        const id = requestButton.dataset.deleteRequest;
+        if (!confirm("Bu başvuruyu / mesajı kalıcı olarak silmek istiyor musunuz?")) return;
+        const previous = database.requests;
+        database.requests = database.requests.filter(item => item.id !== id);
+        if (!saveDatabase()) {
+            database.requests = previous;
+            return;
+        }
+        refreshAdmin();
+        showToast("Kayıt silindi.");
+    }
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+document.body.style.overflow = "hidden";
+loadDatabase();
+renderListings();
+initializeReveal();
+createFallingFlowers();
+</script>
+
+</body>
+</html>
